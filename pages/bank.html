@@ -1,38 +1,58 @@
-<div class="container">
-    <h1>Click the filter icon <small>(<i class="glyphicon glyphicon-filter"></i>)</small></h1>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="panel panel-success">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Tasks</h3>
-                        <div class="pull-right">
-                            <span class="clickable filter" data-toggle="tooltip" title="Toggle table filter" data-container="body">
-                                <i class="glyphicon glyphicon-filter"></i>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="panel-body">
-                        <input type="text" class="form-control" id="task-table-filter" data-action="filter" data-filters="#task-table" placeholder="Filter Tasks" />
-                    </div>
-                    <table class="table table-hover" id="task-table">
-                        <thead>
-                            <tr>
-                                <th>Bank Name</th>
-                                <th>Branches</th>
-                                <th>Address</th>
-                                <th>IFSC</th>
-                            </tr>
-                        </thead>
-                        <tbody ng-repeat="b in bankResult">
-                            <tr>
-                                <td>{{b.bank_name}}</td>
+<h4>BANKS IN {{ city}}</h4>
+<div class="container"> 
+   <form>
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+        <input type="text" class="form-control" placeholder="Search Branch" ng-model="searchBranch">
+      </div>      
+    </div>
+  </form>
+  
+  <table class="table table-bordered table-striped">
+    
+    <thead>
+      <tr>
+        <td>
+          <a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">
+            Bank Name
+            <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
+          </a>
+        </td>
+        <td>
+          <a href="#" ng-click="sortType = 'branch'; sortReverse = !sortReverse">
+          Branch Name
+            <span ng-show="sortType == 'branch' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'branch' && sortReverse" class="fa fa-caret-up"></span>
+          </a>
+        </td>
+        <td>
+          <a href="#" ng-click="sortType = 'address'; sortReverse = !sortReverse">
+          Address 
+            <span ng-show="sortType == 'address' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'address' && sortReverse" class="fa fa-caret-up"></span>
+          </a>
+        </td>
+        <td>
+          <a href="#" ng-click="sortType = 'ifsc'; sortReverse = !sortReverse">
+          IFSC
+            <span ng-show="sortType == 'ifsc' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'ifsc' && sortReverse" class="fa fa-caret-up"></span>
+          </a>
+        </td>
+      </tr>
+    </thead>
+    
+    <tbody ng-repeat="b in bankResult | orderBy:sortType:sortReverse | filter:searchBranch">
+      <tr>
+      <td>{{b.bank_name}}</td>
                                 <td>{{b.branch}}</td>
                                 <td>{{b.address}}</td>
                                 <td>{{b.ifsc}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
+      </tr>
+    </tbody>
+    
+  </table>
+  
+  </div>

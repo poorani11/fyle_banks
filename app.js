@@ -47,5 +47,7 @@ bankApp.controller('bankController', ['$scope','$resource','cityService', functi
     });
     console.log($scope.bankResult);
 
+    
+
 
 }]);
