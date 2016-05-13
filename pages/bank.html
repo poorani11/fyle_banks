@@ -44,7 +44,7 @@
       </tr>
     </thead>
     
-    <tbody ng-repeat="b in bankResult | orderBy:sortType:sortReverse | filter:searchBranch">
+    <tbody ng-repeat="b in bankData | orderBy:sortType:sortReverse | filter:searchBranch">
       <tr>
       <td>{{b.bank_name}}</td>
                                 <td>{{b.branch}}</td>
